@@ -90,3 +90,26 @@ ul.tabs li.current{
 
 
 
+
+
+changes in functions.js file:
+
+
+
+
+at around line 43 find:
+		getPrivateRepositories();
+		
+Add the following sestion of code under the line:
+
+		/* Add tabs control click events here */
+		$('ul.tabs li').click(function(){ var tab_id = $(this).attr('data-tab');
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+
+		
+		
+
+
