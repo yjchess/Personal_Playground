@@ -109,7 +109,7 @@ Add the following sestion of code under the line:
 		$(this).addClass('current');
 		$("#"+tab_id).addClass('current');
 
-		
+		})
 		
 
 
