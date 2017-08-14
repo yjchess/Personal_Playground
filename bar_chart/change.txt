@@ -1,0 +1,61 @@
+index.html change log:
+under     
+<link rel="stylesheet" type="text/css" href="./css/main.css">
+<link rel="stylesheet" type="text/css" href="./css/tabs.css">
+
+ADD link to tabs.css file for tabs control:    
+<link rel="stylesheet" type="text/css" href="./css/d3BarChart.css">
+
+
+under line
+<script src="./js/functions.js" type="text/javascript">
+<script src="./js/d3BubbleCharting.js" type="text/javascript"></script>
+
+ADD link to d3HistogramCharting.js
+<script src="./js/d3HistogramCharting.js" type="text/javascript"></script>
+
+
+
+
+under
+</center>
+
+Add following section of HTML in to index.html file: (replace HTML tabs controls)
+
+<section class ="jumbotron" style = "background-color: #52D017">
+				<h1><u><center>D3 Charts</center></u></h1>
+</section>
+
+<!--Tabs control defined in container class -->
+<div class="container">
+	<ul class="tabs">
+		<li class="tab-link current" data-tab="tab-1">bubble</li>
+		<li class="tab-link" data-tab="tab-2">bar</li>
+		<li class="tab-link" data-tab="tab-3">histogram</li>
+	</ul>
+
+	<div id="tab-1" class="tab-content current">
+        <div id="bubbleChart"><svg></svg></div>
+		    This is bubble chart with d3charting.
+  </div>
+	<div id="tab-2" class="tab-content">
+        <div class="chart-example" id="barChartID"></div>
+	</div>
+	<div id="tab-3" class="tab-content">
+<div class="chart-example" id="groupedBarChart"></div>
+
+	</div>
+
+</div><!-- container -->
+
+
+
+
+
+changes in functions.js file:
+find:
+makeBubbleChart(dataset);
+
+add a line:
+        makeHistogramChart(dataset);
+
