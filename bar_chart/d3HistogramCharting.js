@@ -89,8 +89,11 @@ var makeHistogramChart = function(data) {
     plotGroupedBarChart(data4GroupedBarChart);
 }
 
+var plotAreaHeight=400;
+var plotAreaWidth=700;
+
 var plotGroupedBarChart=function(data){
-    var svg = d3.select("#groupedBarChart").append("svg").attr("width",700).attr("height",500);
+    var svg = d3.select("#groupedBarChart").append("svg").attr("width",plotAreaWidth).attr("height",plotAreaHeight);
     margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
@@ -108,7 +111,8 @@ var plotGroupedBarChart=function(data){
 
     var z = d3.scaleOrdinal()
         //.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c"]);
+        //.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c"]);
+        .range(d3.schemeCategory20);
     /*
     d3.csv("./groupedBarChartData.csv", function(d, i, columns) {
     for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = +d[columns[i]];
@@ -123,20 +127,33 @@ var plotGroupedBarChart=function(data){
     x1.domain(keys).rangeRound([0, x0.bandwidth()]);
     y.domain([0, d3.max(data, function(d) { 
         return d3.max(keys, function(key) { return d[key]; })+extraYPercentage; })]).nice();
+    
+    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
     g.append("g")
         .selectAll("g")
         .data(data)
         .enter().append("g")
         .attr("transform", function(d) { return "translate(" + x0(d.label) + ",0)"; })
-        .selectAll("rect")
+        .selectAll("rect").attr("class", "bar")
         .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
         .enter().append("rect")
         .attr("x", function(d) { return x1(d.key); })
         .attr("y", function(d) { return y(d.value); })
         .attr("width", x1.bandwidth())
         .attr("height", function(d) { return height - y(d.value); })
-        .attr("fill", function(d) { return z(d.key); });
+        .attr("fill", function(d) { return z(d.key); })
+        .on("mousemove", function(d){
+            tooltip
+              .style("left", d3.event.pageX - 50 + "px")
+              .style("top", d3.event.pageY - 70 + "px")
+              .style("display", "inline-block")
+              .html((d.key) + "<br>" + (d.value) + " %");
+        })
+    	.on("mouseout", function(d){ 
+            tooltip.style("display", "none");
+        });
+;
 
     g.append("g")
         .attr("class", "axis")
@@ -179,8 +196,8 @@ var plotGroupedBarChart=function(data){
 
 var plotHistogramBarChart=function(data){
     var margin = {top:10, right:10, bottom:90, left:50};
-    var width = 660 - margin.left - margin.right;
-    var height = 300 - margin.top - margin.bottom;
+    var width = plotAreaWidth - margin.left - margin.right;
+    var height = plotAreaHeight - margin.top - margin.bottom;
     var color = d3.scaleOrdinal().range(d3.schemeCategory20);
     var extraYPercentage=10;
     //var formatPercent = d3.format(".0%");
