@@ -148,7 +148,7 @@ var plotGroupedBarChart=function(data){
               .style("left", d3.event.pageX - 50 + "px")
               .style("top", d3.event.pageY - 70 + "px")
               .style("display", "inline-block")
-              .html((d.key) + "<br>" + (d.value) + " %");
+              .html((d.key) + "<br>" + (d.value==1?0:d.value) + " %");
         })
     	.on("mouseout", function(d){ 
             tooltip.style("display", "none");
