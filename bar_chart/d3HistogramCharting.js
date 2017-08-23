@@ -20,7 +20,7 @@ var makeHistogramChart = function(data) {
     var fullLabelList=["bug","enhancement","duplicate","help wanted",
         "invalid","question","wontfix","projectId","totalIssue","name"];
     // get the required data into data4Histogram array
-    var data4Histogram=[], loopId=-1;    
+    var data4Histogram=[], totalIssue4Project=[],loopId=-1;    
     data.forEach(x=>{ var issueCount=0;  loopId++;
         var dataItem={};
         fullLabelList.forEach(q=>{ dataItem[q]=0;});
@@ -36,7 +36,8 @@ var makeHistogramChart = function(data) {
                 })                
             }
         }) 
-        dataItem["totalIssue"]= issueCount; 
+        dataItem["totalIssue"] = issueCount;
+        totalIssue4Project[loopId] = issueCount;
         if(issueCount>0){
             fullLabelList.forEach(t=>{
                 if(t != "projectId" && t != "totalIssue" && t != "name"){
@@ -62,10 +63,10 @@ var makeHistogramChart = function(data) {
 
     var data4GroupedBarChart=[],columns=[],projId=0;
     columns[0]="label";
-    data.forEach(x=>{ columns[projId+1]=x.repo.name; projId++;});
-    var data4GroupedBarChart=[];
-    var iLabel=0;
-    data4GroupedBarChart['columns']=columns;
+    data.forEach(x=>{ columns[projId+1]=x.repo.name + ", total Issue: " + totalIssue4Project[projId]; 
+        projId++;});
+    var data4GroupedBarChart=[],iLabel=0;
+    data4GroupedBarChart["columns"]=columns;
     fullLabelList.forEach(t=>{
         if(t != "projectId" && t != "totalIssue" && t != "name"){
             var dataItem=[];
@@ -148,7 +149,7 @@ var plotGroupedBarChart=function(data){
               .style("left", d3.event.pageX - 50 + "px")
               .style("top", d3.event.pageY - 70 + "px")
               .style("display", "inline-block")
-              .html((d.key) + "<br>" + (d.value==1?0:d.value) + " %");
+              .html((d.key).replace(", total","<br> Total") + "<br>" + (d.value==1?0:d.value) + " %");
         })
     	.on("mouseout", function(d){ 
             tooltip.style("display", "none");
@@ -170,7 +171,7 @@ var plotGroupedBarChart=function(data){
         .attr("fill", "#000")
         .attr("font-weight", "bold")
         .attr("text-anchor", "start")
-        .text("Percentage");
+        .text("Percentage %");
 
     var legend = g.append("g")
         .attr("font-family", "sans-serif")
@@ -191,7 +192,7 @@ var plotGroupedBarChart=function(data){
         .attr("x", width - 24)
         .attr("y", 9.5)
         .attr("dy", "0.32em")
-        .text(function(d) { return d; });
+        .text(function(d) { return d.split(",")[0]; });
 }
 
 var plotHistogramBarChart=function(data){
@@ -338,4 +339,3 @@ function wrap(text, width) {
     }
   });
 }
-
