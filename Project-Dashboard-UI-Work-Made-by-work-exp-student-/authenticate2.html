@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+</head>    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+var qs = (function(a) {
+  	    if (a == "") return {};
+  	    var b = {};
+  	    for (var i = 0; i < a.length; ++i)
+  	    {
+  	        var p=a[i].split('=');
+  	        if (p.length != 2) continue;
+  	        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+  	    }
+  	    return b;
+  	})(window.location.search.substr(1).split('&'));
+</script>
+<script type="text/javascript">
+var user;
+var user_repos;
+var repos;
+var res ;
+var app;
+var clientId = "c739221209dbba805fef";
+var clientSecret = "0e46ccbb01da28e3a5f187f09d8fb7dea9a664c3";
+	
+$(document).ready(function(){
+	if (qs['code'] != null) {
+		$("#authenticate").remove();
+		
+		$.ajax({
+			type: "GET" , 
+			url : "http://edosil.net/stfc/bridge.php" , 
+			data : {"client_id" : clientId , 
+					"client_secret" : clientSecret,
+					"code" : qs['code'],
+					},
+			//dataType: 'json',
+			accept: 'application/x-www-form-urlencoded' ,
+			success: function(data, textStatus, jqXHR){ 
+				alert("authenticated"); 
+				console.log(data);
+				res = JSON.parse(data);
+				//use localhost for debugging
+				//window.location = "http://localhost:1337/?access_token=" + encodeURIComponent(res.access_token) ;
+				window.location = "http://edosil.net/stfc/?access_token=" + encodeURIComponent(res.access_token) ;
+			} ,
+			fail: function (err){ alert (err);}
+			}
+		);
+		
+		
+	} 
+	else {
+		$("#content_row").append("<input type=\"button\" id=\"authenticate\" value=\"Authenticate\"></input>");
+		$("#authenticate").click(startAuthenticateFlow);
+	}
+	
+});
+
+var startAuthenticateFlow = function () {
+
+	window.location = "https://github.com/login/oauth/authorize?client_id=" + clientId + "&scope=repo%20user";
+	
+}
+</script>
+
+<body style="background-color:gray;">
+<section class ="jumbotron" style = "background-color: #52D017">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+				<h1><u><center>Project Dashboard</center></u></h1>
+</section>
+
+
+<div class="main"></div>
+
+<div id="content_row"></div>
+</body>
+</html>

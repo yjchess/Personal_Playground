@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Project Dashboard</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+
+<!-- Use a local version of jQuery-->
+  <script src="./js/jquery-2.1.0.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>-->
+
+<!-- Remove dependency from jQuery UI -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+ <script src="./js/d3.min.js"></script>
+ <script src="./js/mytable.js"></script>
+
+
+<script src="./js/functions.js" type="text/javascript">
+</script>
+
+</head> 
+<body>
+<body style="background-color:gray;">
+<div id="progressbar"><div class="progress-label">Loading...</div></div>
+<section class ="jumbotron" style = "background-color: #52D017">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+				<h1><u><center>Project Dashboard</center></u></h1>
+</section>
+<div class="main">
+<form class="form" >
+
+<label>Github user :</label>
+<input type="text" name="demail" id="email">
+<input type="button" name="public_repos" id="public_repos" value="Public Repos">
+<input type="button" name="private_repos" id="private_repos" value="Private Repos">
+</form>
+</div>
+<div id="container"></div>
+<center>
+<div id="performance-table"></div>
+
+<div id="performance-table-d3"></div>
+</center>
+</body>
+</html>

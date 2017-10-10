@@ -1,0 +1,37 @@
+
+.colorbox {
+  float: left;
+  width: 50px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.red {
+  background: #F2052D;
+}
+
+.orange {
+  background: #FFA500;
+}
+
+.green {
+  background: #00FF7F;
+}
+.grey {
+  background: #CCCCCC;
+}
+
+  #progressbar .ui-progressbar-value {
+    background-color: #ccc;
+  }
+  .ui-progressbar {
+    position: relative;
+  }
+  .progress-label {
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }

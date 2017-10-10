@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Project Dashboard</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./css/d3BarChart.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+	<link rel="stylesheet" type="text/css" href="./css/tabs.css">
+<!-- Use a local version of jQuery-->
+  <script src="./js/jquery-2.1.0.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>-->
+
+<!-- Remove dependency from jQuery UI -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+ <script src="./js/d3.min.js"></script>
+ <script src="./js/mytable.js"></script>
+ <script src="./js/mess.js"></script>
+
+
+<script src="./js/functions.js" type="text/javascript"></script>
+<script src="./js/d3BubbleCharting.js" type="text/javascript"></script>
+<script src="./js/d3HistogramCharting.js"></script>
+
+
+</head> 
+<body>
+<body style="background-color:gray;">
+<div id="progressbar"><div class="progress-label">Loading...</div></div>
+<section class ="jumbotron" style = "background-color: #52D017">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+				<h1><u><center>Project Dashboard</center></u></h1>
+</section>
+<div class="main">
+<form class="form" >
+
+<label>Github user :</label>
+<input type="text" name="demail" id="email">
+<input type="button" name="public_repos" id="public_repos" value="Public Repos">
+<input type="button" name="private_repos" id="private_repos" value="Private Repos">
+</form>
+</div>
+<div id="container"></div>
+<center>
+<div id="performance-table"></div>
+
+<div id="performance-table-d3"></div>
+</center>
+<!---->
+<section class ="jumbotron" style = "background-color: #52D017">
+				<h1><u><center>D3 Charts</center></u></h1>
+</section>
+
+<!--Tabs control defined in container class -->
+<div class="container">
+	<ul class="tabs">
+		<li class="tab-link current" data-tab="tab-1">bubble chart</li>
+		<li class="tab-link" data-tab="tab-2">Chart Two</li>
+		<li class="tab-link" data-tab="tab-3">Chart Three</li>
+	</ul>
+
+	<div id="tab-1" class="tab-content current">
+        <div id="bubbleChart"><svg></svg></div>
+		    This is bubble chart with d3charting.
+  </div>
+	<div id="tab-2" class="tab-content">
+        <div id="barChartID"></div>
+        This is test D3 2nd Chart
+	</div>
+	<div id="tab-3" class="tab-content">
+	<div id="groupedBarChart"></div>
+		This is test D3 3rd Chart.
+	</div>
+
+</div><!-- container -->
+<!--
+<div></div>
+<link rel="stylesheet" type="text/css" href=".\css\tabs.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<div class="container">
+
+	<ul class="tabs">
+		<li class="tab-link current" data-tab="tab-1">Tab One</li>
+		<li class="tab-link" data-tab="tab-2">Tab Two</li>
+		<li class="tab-link" data-tab="tab-3">Tab Three</li>
+		<li class="tab-link" data-tab="tab-4">Tab Four</li>
+	</ul>
+
+	<div id="tab-1" class="tab-content current">
+        <div class="chart-example" id="chart"><svg></svg></div>
+	</div>
+	<div id="tab-2" class="tab-content">
+        <div class="chart-example" id="newChart"><svg></svg></div>
+	</div>
+	<div id="tab-3" class="tab-content">
+		Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+	</div>
+	<div id="tab-4" class="tab-content">
+		Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	</div>
+</div><!-- container -->
+<!--
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
+<script src=".\js\bubble_chart.js"></script>
+<script>
+
+$(document).ready(function(){
+	
+	$('ul.tabs li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	})
+    ;
+    d3.csv('medium_january.csv', function(error, data) {
+      if (error) {
+          console.error('Error getting or parsing the data.');
+          throw error;
+      }     
+      var chart = bubbleChart().width(600).height(400);
+      d3.select('#chart').data(data).call(chart);
+    });
+    var newData = new Array();
+    for (var i=0;i<10;i++) {
+        obj = {
+            title: "this is " + i + " item",
+            //category: i%2 ==0? "even number":"odd number",
+            category: i,
+            views: 100 + i*1000
+        }
+        newData.push(obj);
+    }
+      var newChart = bubbleChart().width(600).height(400);
+      d3.select('#newChart').data(newData).call(newChart);
+
+})
+-->
+</script>
+</body>
+</html>
